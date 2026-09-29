@@ -37,5 +37,5 @@ py -3.13 -m venv .venv
 .\.venv\Scripts\python -m pip install -r requirements.txt
 ```
 
-Copie `.env.example` para `.env` e preencha a chave da API e o modelo Gemini escolhido. O carregamento dessas variáveis e a execução da API serão definidos durante a implementação.
+Copie `.env.example` para `.env` e preencha a chave da API e o modelo Gemini escolhido. `src/config.py` carrega esse arquivo ao criar o cliente do modelo. Variáveis já definidas no ambiente têm prioridade sobre os valores do `.env`. A execução da API será definida durante a implementação.
 

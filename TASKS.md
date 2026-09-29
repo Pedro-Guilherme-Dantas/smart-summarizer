@@ -12,7 +12,7 @@ Siga as etapas na ordem. Uma etapa concluída significa que o comportamento foi 
 
 ## 1. Configuração e contratos
 
-- [ ] Implementar em `src/config.py` a leitura da chave da API e do modelo Gemini; definir como o `.env` será carregado.
+- [x] Implementar em `src/config.py` a leitura da chave da API e do modelo Gemini; definir como o `.env` será carregado.
 - [ ] Definir em `src/schemas.py` o corpo da requisição HTTP e o formato dos erros.
 - [ ] Definir em `src/state.py` os campos que cada node receberá e produzirá.
 - [ ] Definir as regras de validação da entrada: texto vazio, tamanho máximo e idioma misto.
