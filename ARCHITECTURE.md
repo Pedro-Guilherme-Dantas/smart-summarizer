@@ -16,7 +16,7 @@ O estado em `src/state.py` guarda o texto original, os trechos, a decisão de id
 
 O resumo final usa Markdown com seções fixas definidas em `src/prompts/summary.py`. `build_document` normaliza essa saída. `src/services/pdf_renderer.py` converte Markdown em HTML, remove elementos e atributos não permitidos e gera o PDF com `xhtml2pdf`. O estilo do documento fica no renderizador, separado das regras editoriais do prompt.
 
-O PDF é gerado em memória e retornado como bytes. Isso evita gerenciar arquivos temporários e simplifica a futura adição de novas rotas. O limite de entrada de 256 KiB e 120.000 caracteres limita o custo e a duração de uma requisição. Se o produto precisar aceitar documentos maiores, a API poderá passar a processá-los em segundo plano e disponibilizar o resultado posteriormente.
+O PDF é gerado em memória e retornado como bytes. Ele pode ocupar várias páginas; a extensão do resumo vem das regras do prompt e do conteúdo, não de uma meta de páginas. Isso evita gerenciar arquivos temporários e simplifica a futura adição de novas rotas. O limite de entrada de 256 KiB e 120.000 caracteres limita o custo e a duração de uma requisição, não a quantidade de páginas do PDF. Se o produto precisar aceitar documentos maiores, a API poderá passar a processá-los em segundo plano e disponibilizar o resultado posteriormente.
 
 ## Contratos e erros
 

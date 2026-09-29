@@ -30,7 +30,7 @@ Envie um `.txt` em UTF-8 no campo `file` da rota `POST /v1/summaries/file`:
 curl.exe -X POST "http://127.0.0.1:8000/v1/summaries/file" -F "file=@C:\caminho\conteudo.txt" -o resumo.pdf
 ```
 
-A resposta é um PDF (`application/pdf`). O arquivo pode ter até **256 KiB** e o texto extraído até **120.000 caracteres**. Arquivos vazios, não UTF-8 e com extensão diferente de `.txt` são rejeitados. O PDF é criado em memória e enviado na resposta; não é salvo no servidor.
+A resposta é um PDF (`application/pdf`) com quantas páginas forem necessárias para o resumo. O arquivo de entrada pode ter até **256 KiB** e o texto extraído até **120.000 caracteres**. Arquivos vazios, não UTF-8 e com extensão diferente de `.txt` são rejeitados. O PDF é criado em memória e enviado na resposta; não é salvo no servidor.
 
 O processamento pode fazer várias chamadas ao Gemini para textos longos. O texto é dividido em trechos de até 6.000 caracteres; os resumos parciais são consolidados ao final. A detecção de idioma usa amostras do início, meio e fim, portanto um trecho curto em outro idioma fora dessas amostras pode não ser percebido.
 
