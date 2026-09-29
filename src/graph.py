@@ -2,6 +2,7 @@
 
 from langchain_core.language_models.chat_models import BaseChatModel
 from langgraph.graph import END, START, StateGraph
+from langgraph.graph.state import CompiledStateGraph
 
 from .nodes.build_document import build_document
 from .nodes.detect_language import make_detect_language_node
@@ -14,7 +15,7 @@ def route_after_language(state: SummaryState) -> str:
     return "translate" if state["needs_translation"] else "summarize"
 
 
-def build_graph(model: BaseChatModel):
+def build_graph(model: BaseChatModel) -> CompiledStateGraph:
     builder = StateGraph(SummaryState)
     builder.add_node("detect_language", make_detect_language_node(model))
     builder.add_node("translate", make_translate_node(model))
