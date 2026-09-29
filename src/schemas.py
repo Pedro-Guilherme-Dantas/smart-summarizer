@@ -21,3 +21,8 @@ class SourceDocument(BaseModel):
 
 class ErrorResponse(BaseModel):
     detail: str
+
+
+class LanguageDecision(BaseModel):
+    detected_language: str
+    needs_translation: bool
