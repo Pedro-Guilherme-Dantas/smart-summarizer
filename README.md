@@ -4,7 +4,9 @@ API HTTP que recebe um arquivo `.txt`, cria um resumo em pt-BR com Gemini e Lang
 
 ## Preparação
 
-Requer Python 3.13. No PowerShell, a partir da raiz do projeto:
+Requer Python 3.13. A partir da raiz do projeto:
+
+Windows (PowerShell):
 
 ```powershell
 py -3.13 -m venv .venv
@@ -12,12 +14,28 @@ py -3.13 -m venv .venv
 Copy-Item .env.example .env
 ```
 
+Linux (shell):
+
+```bash
+python3.13 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+cp .env.example .env
+```
+
 Preencha `GOOGLE_API_KEY` e `GEMINI_MODEL` no `.env`. Variáveis já definidas no ambiente têm prioridade sobre as do arquivo. O modelo escolhido precisa estar disponível para sua chave da API Gemini.
 
 ## Executar
 
+Windows (PowerShell):
+
 ```powershell
 .\.venv\Scripts\python -m uvicorn src.api:app --reload
+```
+
+Linux (shell):
+
+```bash
+.venv/bin/python -m uvicorn src.api:app --reload
 ```
 
 A documentação interativa fica em `http://127.0.0.1:8000/docs`. `GET /health` verifica se a API está ativa sem chamar o Gemini.
@@ -26,8 +44,16 @@ A documentação interativa fica em `http://127.0.0.1:8000/docs`. `GET /health` 
 
 Envie um `.txt` em UTF-8 no campo `file` da rota `POST /v1/summaries/file`:
 
+Windows (PowerShell):
+
 ```powershell
 curl.exe -X POST "http://127.0.0.1:8000/v1/summaries/file" -F "file=@C:\caminho\conteudo.txt" -o resumo.pdf
+```
+
+Linux (shell):
+
+```bash
+curl -X POST "http://127.0.0.1:8000/v1/summaries/file" -F "file=@/caminho/conteudo.txt" -o resumo.pdf
 ```
 
 A resposta é um PDF (`application/pdf`) com quantas páginas forem necessárias para o resumo. O arquivo de entrada pode ter até **256 KiB** e o texto extraído até **120.000 caracteres**. Arquivos vazios, não UTF-8 e com extensão diferente de `.txt` são rejeitados. O PDF é criado em memória e enviado na resposta; não é salvo no servidor.
