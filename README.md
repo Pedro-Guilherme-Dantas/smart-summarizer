@@ -30,5 +30,12 @@ O projeto contém apenas a estrutura inicial. Os passos de implementação estã
 
 ## Configuração
 
+Crie um ambiente virtual com Python 3.13 e instale as dependências:
+
+```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements.txt
+```
+
 Copie `.env.example` para `.env` e preencha a chave da API e o modelo Gemini escolhido. O carregamento dessas variáveis e a execução da API serão definidos durante a implementação.
 
