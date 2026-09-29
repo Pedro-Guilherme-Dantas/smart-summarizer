@@ -5,3 +5,6 @@ langchain-google-genai
 pydantic
 python-dotenv
 python-multipart
+markdown-it-py
+bleach
+xhtml2pdf
