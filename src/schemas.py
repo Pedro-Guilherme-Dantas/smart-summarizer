@@ -1,5 +1,7 @@
 """Contrato de texto normalizado, independente da origem da entrada."""
 
+from typing import Any
+
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -20,7 +22,7 @@ class SourceDocument(BaseModel):
 
 
 class ErrorResponse(BaseModel):
-    detail: str
+    detail: str | list[dict[str, Any]]
 
 
 class LanguageDecision(BaseModel):
