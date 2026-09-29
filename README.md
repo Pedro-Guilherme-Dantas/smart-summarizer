@@ -36,6 +36,10 @@ O processamento pode fazer várias chamadas ao Gemini para textos longos. O text
 
 Respostas de erro usam JSON com o campo `detail`. Problemas de entrada retornam 413, 415 ou 422; falhas do modelo retornam 502 e ausência de configuração retorna 503.
 
+## Antes de expor a API na internet
+
+A versão atual foi feita para uso local e não exige autenticação. Para uso público, configure autenticação, limite de requisições e limite do corpo HTTP na camada de entrada para evitar abuso da chave Gemini e uploads excessivos. O conteúdo enviado é processado pela API Gemini; não envie documentos sensíveis sem avaliar essa transferência.
+
 ## Organização
 
 - `src/inputs/`: converte uma origem, hoje TXT, em texto normalizado.

@@ -44,7 +44,7 @@ async def summarize_file(file: Annotated[UploadFile, File()]) -> Response:
         pdf = await create_summary_pdf(source)
     except ValueError as exc:
         logger.exception("Configuração do Gemini ausente ou inválida")
-        raise HTTPException(status_code=503, detail=str(exc)) from exc
+        raise HTTPException(status_code=503, detail="Serviço de IA indisponível") from exc
     except ModelProcessingError as exc:
         logger.exception("Falha no processamento do modelo")
         raise HTTPException(status_code=502, detail=str(exc)) from exc
