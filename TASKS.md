@@ -1,43 +1,52 @@
 # Tasks — Smart Summarizer
 
-## 1. Preparar o projeto
+Siga as etapas na ordem. Uma etapa concluída significa que o comportamento foi implementado; a existência de um arquivo vazio não conta como implementação.
 
-- [x] Criar a estrutura base em `src/` e inicializar o repositório Git.
-- [x] Configurar Python 3.13 e as dependências já escolhidas no `pyproject.toml`.
-- [x] Criar `requirements.txt` com as dependências já escolhidas.
-- [x] Criar `.venv` local com Python 3.13 e instalar as dependências.
-- [x] Criar `.env.example` com as variáveis necessárias para a API do Gemini.
-- [x] Documentar no `README.md` a preparação do ambiente.
-- [ ] Documentar no `README.md` como executar a API após sua implementação.
+**Decisões já tomadas:** entrada por API HTTP, modelo Gemini, resumo sempre em pt-BR e Markdown como base do PDF.
 
-## 2. Definir os contratos
+## 0. Estrutura e ambiente — concluído
 
-- [ ] Definir em `src/schemas.py` o formato da requisição HTTP e da resposta.
-- [ ] Definir em `src/state.py` os campos compartilhados pelos nodes do LangGraph.
-- [ ] Definir os critérios para texto vazio, tamanho máximo e tratamento de erros.
+- [x] Criar a estrutura de diretórios em `src/` e inicializar o repositório Git.
+- [x] Configurar Python 3.13, `pyproject.toml`, `requirements.txt` e `.venv` local.
+- [x] Criar `.env.example`, `.gitignore` e instruções iniciais no `README.md`.
 
-## 3. Montar o fluxo de IA
+## 1. Configuração e contratos
 
-- [ ] Criar os prompts de detecção de idioma, tradução e resumo em `src/prompts/`.
-- [ ] Implementar `detect_language`: identificar o idioma e decidir se precisa traduzir para pt-BR.
-- [ ] Implementar `translate`: traduzir apenas quando necessário, preservando o conteúdo.
-- [ ] Implementar `summarize`: produzir um resumo geral em pt-BR conforme as regras do prompt.
-- [ ] Implementar em `src/graph.py` a rota condicional entre detecção, tradução e resumo.
+- [ ] Implementar em `src/config.py` a leitura da chave da API e do modelo Gemini; definir como o `.env` será carregado.
+- [ ] Definir em `src/schemas.py` o corpo da requisição HTTP e o formato dos erros.
+- [ ] Definir em `src/state.py` os campos que cada node receberá e produzirá.
+- [ ] Definir as regras de validação da entrada: texto vazio, tamanho máximo e idioma misto.
 
-## 4. Lidar com textos grandes
+## 2. Entrada HTTP inicial
 
-- [ ] Definir como dividir entradas que excedam o tamanho aceito em uma chamada ao modelo.
-- [ ] Resumir os trechos e consolidá-los em um único resumo, evitando repetições e perdas importantes.
+- [ ] Criar a aplicação FastAPI e uma rota POST em `src/api.py` que receba e valide o texto.
+- [ ] Definir onde a API guardará o PDF durante a requisição e como devolverá o arquivo ao cliente.
 
-## 5. Gerar o documento
+## 3. Estratégia para textos grandes
 
-- [x] Definir o Markdown produzido pelo resumo como entrada do renderizador.
-- [ ] Escolher e adicionar a biblioteca de geração de PDF às dependências.
-- [ ] Criar um estilo fixo para o PDF e implementar a conversão Markdown → PDF em `src/services/`.
-- [ ] Garantir que caracteres e acentos em pt-BR apareçam corretamente no PDF.
+- [ ] Definir o tamanho dos trechos e implementar a divisão do texto em `src/services/text_splitter.py`.
+- [ ] Definir como traduzir e resumir trechos sem perder a ordem e como consolidar os resumos parciais.
 
-## 6. Expor a API HTTP
+## 4. Fluxo de IA no LangGraph
 
-- [ ] Criar em `src/api.py` o endpoint que recebe o texto e executa o grafo.
-- [ ] Retornar o PDF gerado ao cliente e informar erros de entrada ou geração de forma clara.
-- [ ] Descrever no `README.md` um exemplo de requisição e resposta.
+- [ ] Escrever os prompts de detecção de idioma, tradução e resumo em `src/prompts/`.
+- [ ] Implementar `detect_language` com uma decisão clara sobre traduzir ou seguir direto.
+- [ ] Implementar `translate` para produzir texto em pt-BR quando necessário.
+- [ ] Implementar `summarize` para gerar e consolidar o resumo conforme as regras do prompt.
+- [ ] Montar e compilar o grafo em `src/graph.py`, incluindo a rota condicional que pula a tradução para textos em português.
+
+## 5. Documento e PDF
+
+- [ ] Implementar `build_document` e `src/services/markdown_document.py` para preparar o Markdown final.
+- [ ] Escolher uma biblioteca de PDF e adicioná-la a `requirements.txt` e `pyproject.toml`.
+- [ ] Implementar em `src/services/pdf_renderer.py` a conversão do Markdown para PDF com um estilo fixo e suporte a acentos em pt-BR.
+
+## 6. Fechar a API HTTP
+
+- [ ] Conectar a rota POST ao grafo e à geração do PDF.
+- [ ] Devolver o PDF na resposta HTTP e tratar falhas do modelo, da validação e da renderização.
+
+## 7. Documentação de uso
+
+- [ ] Documentar no `README.md` como iniciar a API e enviar uma requisição de exemplo.
+- [ ] Registrar no `README.md` os limites de entrada e as decisões de tradução e geração do PDF.
