@@ -1,0 +1,2 @@
+# Node de resumo.
+

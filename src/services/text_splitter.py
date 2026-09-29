@@ -1,0 +1,2 @@
+# Divisão de textos grandes.
+

@@ -1,0 +1,12 @@
+[project]
+name = "smart-summarizer"
+version = "0.1.0"
+description = "API HTTP para resumir textos em pt-BR e gerar PDFs"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "langgraph",
+    "langchain-google-genai",
+]
+

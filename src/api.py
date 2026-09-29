@@ -1,0 +1,2 @@
+# Entrada HTTP da aplicação.
+
