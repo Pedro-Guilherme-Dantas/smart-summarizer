@@ -2,9 +2,13 @@
 
 ## 1. Preparar o projeto
 
-- [ ] Configurar o projeto Python e as dependências no `pyproject.toml`.
-- [ ] Criar `.env.example` com as variáveis necessárias para a API do Gemini.
-- [ ] Documentar no `README.md` como configurar e executar a aplicação.
+- [x] Criar a estrutura base em `src/` e inicializar o repositório Git.
+- [x] Configurar Python 3.13 e as dependências já escolhidas no `pyproject.toml`.
+- [x] Criar `requirements.txt` com as dependências já escolhidas.
+- [x] Criar `.venv` local com Python 3.13 e instalar as dependências.
+- [x] Criar `.env.example` com as variáveis necessárias para a API do Gemini.
+- [x] Documentar no `README.md` a preparação do ambiente.
+- [ ] Documentar no `README.md` como executar a API após sua implementação.
 
 ## 2. Definir os contratos
 
@@ -27,7 +31,8 @@
 
 ## 5. Gerar o documento
 
-- [ ] Definir o Markdown produzido pelo resumo como entrada do renderizador.
+- [x] Definir o Markdown produzido pelo resumo como entrada do renderizador.
+- [ ] Escolher e adicionar a biblioteca de geração de PDF às dependências.
 - [ ] Criar um estilo fixo para o PDF e implementar a conversão Markdown → PDF em `src/services/`.
 - [ ] Garantir que caracteres e acentos em pt-BR apareçam corretamente no PDF.
 
